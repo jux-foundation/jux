@@ -1,0 +1,12 @@
+[Unit]
+Description=Judge daemon socket
+
+[Socket]
+ListenStream=127.0.0.1:31415
+ListenStream=[::1]:31415
+ListenStream=127.0.0.1:31416
+ListenStream=[::1]:31416
+KeepAlive=true
+
+[Install]
+WantedBy=sockets.target

@@ -1,0 +1,12 @@
+[Unit]
+Description=Judge daemon
+Documentation=http://algorithms.ir/~mahrud/blog/2011/08/project-hellijudge/
+# Sockets=jux.socket
+
+[Service]
+Type=forking
+ExecStart=/judge/utils/daemon.sh
+PIDFile=/judge/run/jux/jux.pid
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,44 @@
+
+ HelliJudge
+ 	This is a judging system for onsite & online contests.
+
+ Features
+ 	TO BE COMPLETED, asap!
+
+ Install & Configuration
+	scanf module for python: https://hkn.eecs.berkeley.edu/~dyoo/python/scanf/
+
+	/etc/security/limits.d/judge.conf
+	/etc/security/chroot.conf
+	/etc/pam.d/jail
+	/etc/pam.d/su
+
+	/mnt/jail
+	mkdir /mnt/jail/home
+	mkdir /mnt/jail/source
+	ln -s /mnt/jail /judge/jail
+
+	mkdir /var/log/jury
+	ln -s /var/log/jury /judgr/log
+
+ 	TO BE COMPLETED, asap!
+
+ Documentation
+ 	TO BE COMPLETED, asap!
+
+ License
+	Copyright (C) 2011   Hamed Saleh & Mahrud Sayrafi
+
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+ Authors & Contact information
+ 	Hamed Saleh <hameelas@gmail.com.NOSPAM>
+	Mahrud Sayrafi <sayrafi.m@gmail.com.NOSPAM>
