@@ -19,7 +19,7 @@
 	ln -s /mnt/jail /judge/jail
 
 	mkdir /var/log/jury
-	ln -s /var/log/jury /judgr/log
+	ln -s /var/log/jury /judge/log
 
  	TO BE COMPLETED, asap!
 
