@@ -1,34 +1,30 @@
 #!/usr/bin/env python3
 
-#	core.py
+#    core.py
 #       Copyright (C) 2011-`date +%Y`  Hamed Saleh and Mahrud Sayrafi
 
 #       This program comes with ABSOLUTELY NO WARRANTY.
 #       This is free software, and you are welcome to redistribute it
 #       under certain conditions; see LICENSE for details.
 
-import sys
-
-sys.path[0:0] = [ "/judge/etc/jux" ]	#FIXME
-import config
-
-# import options
-
-import compile
-#from compile import compile
-#from run import run
-
+from config import *
+from log import record
+from os import getpid, getppid
+import os
+from compile import compile
+#import run
 #import output
 
-# read options
+pid = getpid()
+ppid = getppid()
 
-# read configs
+record('core', pid, 'Core started: (ppid: %i)' % (ppid))
+record('core', pid, '%i:%s:%s:%s:%s' % 
+    (args.subid, args.user, args.problem, args.code.name, args.lang))
 
-# compile
-#compile()
+compile(args.subid, os.path.abspath(args.code.name), args.lang)
 
-# run
 #run()
 
-# return
+#return
 

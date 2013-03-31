@@ -5,7 +5,9 @@
 #	See <URL:http://hellicode.allamehelli.ir/> for detailed information.
 
 #	General configurations:
-
+test='salam'
+timestamp_format="%b %d %H:%M:%S"
+errlog='error.log'
 #ServerRoot=
 #PidFile=
 #User
