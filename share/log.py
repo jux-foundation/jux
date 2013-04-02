@@ -16,7 +16,7 @@ import datetime
 
 def record(process, pid, msg, parent='jux', ppid=getppid()):
     timestamp = datetime.datetime.now().strftime(config.timestamp_format)
-    print('%s    %s    %s[%i]:    %s' % 
+    print("%s\t%s\t%s[%i]:\t%s" % 
         (timestamp, config.hostname, process, pid, msg), file=stderr)
-#    print( '%s    %s    %s[%i]:    %s' % 
+#    print("%s\t%s\t%s[%i]:\t%s' % 
 #        (timestamp, config.hostname, process, pid, msg), file=config.errlog)
