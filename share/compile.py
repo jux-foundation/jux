@@ -7,23 +7,25 @@
 #       This is free software, and you are welcome to redistribute it
 #       under certain conditions; see LICENSE for details.
 
-import config
-from config import pid, compilers
-from os import system
+import os
 from log import record
+from config import *
+from subprocess import Popen as call
 
-def compile(subid, code, lang):
-    addr = '%s/%i.%s' % (config.source_path, subid, lang)
-    system('cp -f %s %s' % (code, addr))
+def compile(code):
+    addr = '%s/%i.%s' % (source_path, code.subid, code.lang)
+    call('cp -f %s %s' % (os.path.abspath(code.addr.name), addr), 
+        stderr = error_log, shell = True)
 
-    code = addr
-    compiler, compiler_args = compilers[lang]
+    compiler, compiler_args = compilers[code.lang]
+    compile_log = open('%s/%i-%s-%s-%s.log' % 
+        (log_path, code.subid, code.owner, code.prob, code.lang), 'w')
 
     record('core', pid, '%s starting ...' % (compiler))
+    ret = call('%s %s %s' % 
+        (compiler, addr, ' '.join(compiler_args) % (code.subid)), 
+        stdout = compile_log, stderr = compile_log, shell = True)
 
-    ret = system('%s %s %s' % (compiler, code, ' '.join(compiler_args)))
+    ret.wait(timeout=compile_timeout)
 
-    cpid = -1 # FIXME: this is supposed to be the compiler's pid
-
-    record(compiler, cpid, 'Returned %i' % (ret))
-    #TODO: record compiler warnings/errors to file
+    record(compiler, ret.pid, 'Returned %i' % (ret.returncode))

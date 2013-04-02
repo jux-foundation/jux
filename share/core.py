@@ -8,23 +8,20 @@
 #       under certain conditions; see LICENSE for details.
 
 from config import *
+from options import code
 from log import record
-from os import getpid, getppid
-import os
-from compile import compile
-#import run
-#import output
 
-pid = getpid()
-ppid = getppid()
+from compile import compile
+from run import execute
+#import output
 
 record('core', pid, 'Core started: (ppid: %i)' % (ppid))
 record('core', pid, '%i:%s:%s:%s:%s' % 
-    (args.subid, args.user, args.problem, args.code.name, args.lang))
+    (code.subid, code.owner, code.prob, code.addr.name, code.lang))
 
-compile(args.subid, os.path.abspath(args.code.name), args.lang)
+compile(code)
 
-#run()
+execute(code)
 
 #return
 

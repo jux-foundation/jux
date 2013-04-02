@@ -7,6 +7,9 @@
 #       This is free software, and you are welcome to redistribute it
 #       under certain conditions; see LICENSE for details.
 
+echo $@
+exit
+
 TEST=$1 shift
 TIME_LIMIT=`expr 2 \* $1` shift
 FIRST_INPUT=$@
