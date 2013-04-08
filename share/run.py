@@ -8,22 +8,20 @@
 #       under certain conditions; see LICENSE for details.
 
 import os
-from log import record
+from log import record, err_log_fd, bin_log_fd
 from config import *
 from subprocess import Popen as call
 
 def execute(code):
     addr = '%s/%i.%s' % (bin_path, code.subid, ext)
     jailer, jailer_args = jailers[code.lang]
-    binary_log = open('%s/%i-%s-%s-%s.log' % 
-        (log_path, code.subid, code.owner, code.prob, 'binary'), 'w') # TODO 'w+b'?
 
     record('core', pid, '%s starting ...' % (jailer))
     ret = call('%s/%s %s %s' % 
         (judge_path, jailer, addr, ' '.join(jailer_args)), #TODO jailer_args
-        stdout = binary_log, stderr = binary_log, shell = True) #FIXME
+        stdout = bin_log_fd, stderr = bin_log_fd, shell = True) #FIXME bin_log or jail_log?
 
-    ret.wait(timeout=binary_timeout) # FIXME: why does it return 127?
+    ret.wait(timeout=binary_timeout)
 
     results=['1','2','3','4'] # FIXME
 

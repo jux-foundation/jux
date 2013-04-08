@@ -8,7 +8,6 @@
 #       under certain conditions; see LICENSE for details.
 
 from config import *
-from options import code
 from log import record
 
 from compile import compile

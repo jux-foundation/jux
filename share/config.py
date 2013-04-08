@@ -19,11 +19,19 @@ ppid = getppid()
 owner = getlogin()
 hostname = gethostname()
 
+#FIXME move everything below here until the submission class to juxd_config
+
 judge_path = '/judge/share'
+
 jail_path = '/mnt/jail'
 bin_path = jail_path + '/home'
-source_path = jail_path + '/source'
+src_path = jail_path + '/source'
 log_path = jail_path + '/var/log' #FIXME
+err_log = 'error.log'
+comp_log = None
+bin_log = None
+
+timestamp_format="%b %d %H:%M:%S.%f"
 
 ext = 'out' #FIXME, depending on lang?
 
@@ -41,15 +49,16 @@ jailers = {'cpp': ['jail.sh', ['%s %i:%i' % (jail_path, jail_uid, jail_gid)]],  
 compile_timeout = 5
 binary_timeout = 5
 
-error_log = open('%s/error.log' % (log_path), 'a')
-
 class submission:
     def __init__(self, data):
-        self.subid = data['subid']
-        self.owner = data['owner']
-        self.prob = data['prob']
-        self.addr = data['addr']
-        self.lang = data['lang']
+        self.subid = data.subid
+        self.owner = data.owner
+        self.prob = data.prob
+        self.addr = data.addr
+        self.lang = data.lang
 
     def compile(self):  #TODO: hmmm, what?
         compile.compile(self)
+
+from options import *
+

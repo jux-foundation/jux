@@ -1,5 +1,4 @@
- - redirect stderr of $OUT to /dev/null
- - maxtime maxmem badstat mark FINISH
- - localmode (disable mysql communication for localhost testing)
- - unknown problem with scanf.
  - list requirements. MySQL-python
+ - make compile independent
+ - rewrite jail to be standalone
+ - rewrite the daemon and other utils

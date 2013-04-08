@@ -8,24 +8,22 @@
 #       under certain conditions; see LICENSE for details.
 
 import os
-from log import record
+from log import record, err_log_fd, comp_log_fd
 from config import *
 from subprocess import Popen as call
 
 def compile(code):
-    addr = '%s/%i.%s' % (source_path, code.subid, code.lang)
+    addr = '%s/%i.%s' % (src_path, code.subid, code.lang)
     call('cp -f %s %s' % (os.path.abspath(code.addr.name), addr), 
-        stderr = error_log, shell = True)
+        stderr = err_log_fd, shell = True)
 
     compiler, compiler_args = compilers[code.lang]
-    compile_log = open('%s/%i-%s-%s-%s.log' % 
-        (log_path, code.subid, code.owner, code.prob, code.lang), 'w')
 
     record('core', pid, '%s starting ...' % (compiler))
     ret = call('%s %s %s' % 
         (compiler, addr, ' '.join(compiler_args) % (code.subid)), 
-        stdout = compile_log, stderr = compile_log, shell = True)
+        stdout = comp_log_fd, stderr = comp_log_fd, shell = True)
 
-    ret.wait(timeout=compile_timeout)
+    ret.wait(timeout = compile_timeout)
 
     record(compiler, ret.pid, 'Returned %i' % (ret.returncode))
